@@ -1,0 +1,23 @@
+# Terraform
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/.terraform.lock.hcl
+terraform/crash.log
+terraform/crash.*.log
+
+# Node
+orders-service/node_modules/
+orders-service/npm-debug.log
+
+# Python
+products-service/__pycache__/
+products-service/*.pyc
+products-service/.venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
