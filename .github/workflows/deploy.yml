@@ -34,8 +34,8 @@ jobs:
 
       - name: Build, tag, push image
         run: |
-          docker build -t 075992502789.dkr.ecr.ap-south-1.amazonaws.com/${{ matrix.service }}:${{ github.sha }} ./${{ matrix.service }}
-          docker push 075992502789.dkr.ecr.ap-south-1.amazonaws.com/${{ matrix.service }}:${{ github.sha }}
+          docker build -t 075992502789.dkr.ecr.ap-south-1.amazonaws.com/microservice-eks-demo-app:${{ matrix.service }}-${{ github.sha }} ./${{ matrix.service }}
+          docker push 075992502789.dkr.ecr.ap-south-1.amazonaws.com/microservice-eks-demo-app:${{ matrix.service }}-${{ github.sha }}
 
       - name: Set up kubeconfig
         run: aws eks update-kubeconfig --region ap-south-1 --name microservice-eks-demo
@@ -43,5 +43,5 @@ jobs:
       - name: Deploy new image
         run: |
           kubectl set image deployment/${{ matrix.service }} \
-            ${{ matrix.service == 'orders-service' && 'orders' || 'products' }}=075992502789.dkr.ecr.ap-south-1.amazonaws.com/${{ matrix.service }}:${{ github.sha }}
+            ${{ matrix.service == 'orders-service' && 'orders' || 'products' }}=075992502789.dkr.ecr.ap-south-1.amazonaws.com/microservice-eks-demo-app:${{ matrix.service }}-${{ github.sha }}
           kubectl rollout status deployment/${{ matrix.service }} --timeout=90s
