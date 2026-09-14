@@ -40,6 +40,16 @@ jobs:
       - name: Set up kubeconfig
         run: aws eks update-kubeconfig --region ap-south-1 --name microservice-eks-demo
 
+      - name: Substitute image and apply manifests
+        run: |
+          sed -i "s|IMAGE_PLACEHOLDER|075992502789.dkr.ecr.ap-south-1.amazonaws.com/microservice-eks-demo-app:${{ matrix.service }}-${{ github.sha }}|g" k8s/deployment-${{ matrix.service == 'orders-service' && 'orders' || 'products' }}.yaml
+          kubectl apply -f k8s/deployment-${{ matrix.service == 'orders-service' && 'orders' || 'products' }}.yaml
+          kubectl apply -f k8s/ingress.yaml
+          kubectl rollout status deployment/${{ matrix.service }} --timeout=120s
+
+      - name: Set up kubeconfig
+        run: aws eks update-kubeconfig --region ap-south-1 --name microservice-eks-demo
+
       - name: Deploy new image
         run: |
           kubectl set image deployment/${{ matrix.service }} \
