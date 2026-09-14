@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: products
-        image: 075992502789.dkr.ecr.ap-south-1.amazonaws.com/orders-service:latest
+        image: IMAGE_PLACEHOLDER
         ports: [{ containerPort: 5000 }]
 ---
 apiVersion: v1
