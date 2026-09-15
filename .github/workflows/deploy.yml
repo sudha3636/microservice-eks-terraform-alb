@@ -24,30 +24,31 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Configure AWS credentials via OIDC
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-            role-to-assume: arn:aws:iam::075992502789:role/GitHubActions-Terraform-EKS
-            aws-region: ap-south-1
+       uses: aws-actions/configure-aws-credentials@v4
+       with:
+       role-to-assume: arn:aws:iam::075992502789:role/GitHubActions-Terraform-EKS
+       aws-region: ap-south-1
+      audience: sts.amazonaws.com
 
-      - name: Login to ECR
+       - name: Login to ECR
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build, tag, push image
+       - name: Build, tag, push image
         run: |
           docker build -t 075992502789.dkr.ecr.ap-south-1.amazonaws.com/microservice-eks-demo-app:${{ matrix.service }}-${{ github.sha }} ./${{ matrix.service }}
           docker push 075992502789.dkr.ecr.ap-south-1.amazonaws.com/microservice-eks-demo-app:${{ matrix.service }}-${{ github.sha }}
 
-      - name: Set up kubeconfig
+        - name: Set up kubeconfig
         run: aws eks update-kubeconfig --region ap-south-1 --name microservice-eks-demo
 
-      - name: Substitute image and apply manifests
-        run: |
+        - name: Substitute image and apply manifests
+          run: |
           sed -i "s|IMAGE_PLACEHOLDER|075992502789.dkr.ecr.ap-south-1.amazonaws.com/microservice-eks-demo-app:${{ matrix.service }}-${{ github.sha }}|g" k8s/deployment-${{ matrix.service == 'orders-service' && 'orders' || 'products' }}.yaml
           kubectl apply -f k8s/deployment-${{ matrix.service == 'orders-service' && 'orders' || 'products' }}.yaml
           kubectl apply -f k8s/ingress.yaml
           kubectl rollout status deployment/${{ matrix.service }} --timeout=120s
 
-      - name: Set up kubeconfig
+       - name: Set up kubeconfig
         run: aws eks update-kubeconfig --region ap-south-1 --name microservice-eks-demo
 
       - name: Deploy new image
