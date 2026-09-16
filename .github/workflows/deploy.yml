@@ -44,17 +44,14 @@ jobs:
  
       - name: Substitute image and apply manifests 
         run: | 
-               DEPLOYMENT_FILE="k8s/${{ matrix.service == 'orders-service' && 'deployment-orders' || 'products-service' }}.yaml"
-                           sed -i "s|IMAGE_PLACEHOLDER|075992502789.dkr.ecr.ap-south-1.amazonaws.com/microservice-eks-demo-app:${{ matrix.service }}-${{ github.sha }}|g" $DEPLOYMENT_FILE
-                           kubectl apply -f $DEPLOYMENT_FILE --validate=false
-                           kubectl apply -f k8s/ingress.yaml --validate=false
-                           kubectl rollout status deployment/${{ matrix.service }} --timeout=120s 
- 
-                           - name: Set up kubeconfig 
-                            run: aws eks update-kubeconfig --region ap-south-1 --name microservice-eks-demo 
+          DEPLOYMENT_FILE="k8s/${{ matrix.service == 'orders-service' && 'deployment-orders' || 'deployment-products' }}.yaml"
+          sed -i "s|IMAGE_PLACEHOLDER|075992502789.dkr.ecr.ap-south-1.amazonaws.com/microservice-eks-demo-app:${{ matrix.service }}-${{ github.sha }}|g" $DEPLOYMENT_FILE
+          kubectl apply -f $DEPLOYMENT_FILE --validate=false
+          kubectl apply -f k8s/ingress.yaml --validate=false
+          kubectl rollout status deployment/${{ matrix.service }} --timeout=120s 
  
       - name: Deploy new image 
         run: | 
-          kubectl set image deployment/${{ matrix.service }} \ 
+          kubectl set image deployment/${{ matrix.service }} \
             ${{ matrix.service == 'orders-service' && 'orders' || 'products' }}=075992502789.dkr.ecr.ap-south-1.amazonaws.com/microservice-eks-demo-app:${{ matrix.service }}-${{ github.sha }} 
           kubectl rollout status deployment/${{ matrix.service }} --timeout=90s
