@@ -44,7 +44,7 @@ jobs:
  
       - name: Substitute image and apply manifests 
         run: | 
-          DEPLOYMENT_FILE="k8s/${{ matrix.service == 'orders-service' && 'deployment-orders' || 'deployment-products' }}.yaml"
+          DEPLOYMENT_FILE="k8s/${{ matrix.service == 'orders-service' && 'deployment-orders' || 'products-service' }}.yaml"
           sed -i "s|IMAGE_PLACEHOLDER|075992502789.dkr.ecr.ap-south-1.amazonaws.com/microservice-eks-demo-app:${{ matrix.service }}-${{ github.sha }}|g" $DEPLOYMENT_FILE
           kubectl apply -f $DEPLOYMENT_FILE --validate=false
           kubectl apply -f k8s/ingress.yaml --validate=false
