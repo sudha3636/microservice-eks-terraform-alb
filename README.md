@@ -4,7 +4,7 @@ A cost-optimized, end-to-end DevOps project: two containerized microservices dep
 
 ## Architecture
 
- Architecture overview | ![Architecture diagram]([screenshots/Architecture diagram of the project.png](url))
+ Architecture overview | ![Architecture diagram](./screenshots/Architecture%20diagram%20of%20the%20project.png)
 
 ## Tech Stack
 Infrastructure as Code: Terraform (EKS module, default VPC data sources)
