@@ -45,12 +45,18 @@ Waits for rollout to complete before marking the job successful
 
 ```text
 microservice-eks-terraform-alb/
-├── .github/workflows/deploy.yml   # CI/CD pipeline
-├── terraform/                     # All infrastructure as code
-├── k8s/                           # Kubernetes manifests (Deployments, Ingress)
-├── orders-service/                # Node.js/Express microservice
-├── products-service/              # Python/Flask microservice
-└── screenshots/                   # Proof-of-work images
+├── .github/
+│   └── workflows/
+│       └── deploy.yml          # CI/CD pipeline
+├── terraform/                  # Infrastructure as Code
+├── k8s/                        # Kubernetes manifests
+│   ├── orders-deployment.yaml
+│   ├── products-deployment.yaml
+│   └── ingress.yaml
+├── orders-service/             # Node.js/Express microservice
+├── products-service/           # Python/Flask microservice
+└── screenshots/                # Proof-of-work images
+'''
 
 ## Setup / Reproduce This Project
 
