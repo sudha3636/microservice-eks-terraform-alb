@@ -39,7 +39,7 @@ Runs kubectl set image to perform a rolling update on the live EKS deployment
 Waits for rollout to complete before marking the job successful
 
 ![GitHub Actions successful run](screenshots/github-actions-success-orders.png)
-                               [(screenshots/github-actions-success-products.png).]
+![GitHub Actions successful run](screenshots/github-actions-success-products.png).
 
 ## Repository Structure
 
