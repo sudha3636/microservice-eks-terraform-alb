@@ -43,6 +43,7 @@ Waits for rollout to complete before marking the job successful
 
 ## Repository Structure
 
+```text
 microservice-eks-terraform-alb/
 ├── .github/workflows/deploy.yml   # CI/CD pipeline
 ├── terraform/                     # All infrastructure as code
