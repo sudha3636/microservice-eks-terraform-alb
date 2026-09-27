@@ -4,7 +4,7 @@ A cost-optimized, end-to-end DevOps project: two containerized microservices dep
 
 ## Architecture
 
-![(screenshots/[Architecture diagram of the project.png)](url).]
+ Architecture overview | ![Architecture diagram]([screenshots/Architecture diagram of the project.png](url))
 
 ## Tech Stack
 Infrastructure as Code: Terraform (EKS module, default VPC data sources)
@@ -64,7 +64,6 @@ Create a scoped IAM user for CI/CD, add its access keys as GitHub repo secrets, 
 | | |
 |---|---|
 | `terraform apply` output | ![terraform apply](screenshots/terraform-apply.png) |
-| EKS cluster overview | ![eks-cluster-overview.png](url) |
 | Nodes ready | ![kubectl pods status](screenshots/kubectl-logs.png) |
 | Ingress | ![ALB response](screenshots/ec2-load-balancer.png) |
 
