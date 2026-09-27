@@ -41,22 +41,26 @@ Waits for rollout to complete before marking the job successful
 ![GitHub Actions successful run](screenshots/github-actions-success-orders.png)
 ![GitHub Actions successful run](screenshots/github-actions-success-products.png).
 
-## Repository Structure
+## 📁 Project Structure
 
 ```text
 microservice-eks-terraform-alb/
-├── .github/
-│   └── workflows/
-│       └── deploy.yml          # CI/CD pipeline
-├── terraform/                  # Infrastructure as Code
-├── k8s/                        # Kubernetes manifests
-│   ├── orders-deployment.yaml
-│   ├── products-deployment.yaml
-│   └── ingress.yaml
-├── orders-service/             # Node.js/Express microservice
-├── products-service/           # Python/Flask microservice
-└── screenshots/                # Proof-of-work images
-'''
+├── .github/workflows/     # GitHub Actions CI/CD
+├── terraform/             # AWS infrastructure using Terraform
+├── k8s/                   # Kubernetes manifests
+├── orders-service/        # Node.js microservice
+├── products-service/      # Python microservice
+└── screenshots/           # Project screenshots
+```
+
+### Key Components
+
+- **Terraform** – Provisions the AWS infrastructure and EKS cluster
+- **Kubernetes** – Manages application deployments and Ingress
+- **Orders Service** – Node.js/Express microservice
+- **Products Service** – Python/Flask microservice
+- **GitHub Actions** – Automates build, image push, and deployment
+- **AWS Load Balancer Controller** – Exposes services through an Application Load Balancer
 
 ## Setup / Reproduce This Project
 
