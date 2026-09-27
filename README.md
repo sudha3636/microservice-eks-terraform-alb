@@ -68,8 +68,8 @@ Create a scoped IAM user for CI/CD, add its access keys as GitHub repo secrets, 
 | Ingress | ![ALB response](screenshots/ec2-load-balancer.png) |
 
 ## Live application, routed through the ALB
-|/orders | ![alb-orders-output](screenshots/alb-orders-response.png). |
-|/products | ![alb-products-output](screenshots/alb-products-response.png).
+| orders | ![alb-orders-output](screenshots/alb-orders-response.png). |
+| products | ![alb-products-output](screenshots/alb-products-response.png).
 
 ## Notable Issues Solved During This Build
 
