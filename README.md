@@ -18,10 +18,6 @@ Registry: Amazon ECR
 
 This project was intentionally built to minimize AWS spend for a personal-account demo, while keeping the tradeoffs explicit and defensible:
 
-## Cost-Optimization Decisions
-
-This project was intentionally built to minimize AWS spend for a personal-account demo, while keeping the tradeoffs explicit and defensible:
-
 Decision	Why
 No NAT Gateway	Biggest recurring EKS-adjacent cost (~$32/mo if left running); nodes use public IPs instead, protected by the EKS-managed node security group
 Default VPC (not a new one)	Default VPC subnets already route to an Internet Gateway, avoiding NAT entirely; in a team/production setting, a dedicated VPC would be used
